@@ -18,38 +18,61 @@
         }
     </style>
     <script>
-        function validateForm() {
-            // Get form values
+       function validateForm() {
             var userId = document.getElementById("userId").value;
             var name = document.getElementById("name").value;
             var password = document.getElementById("password").value;
             var email = document.getElementById("email").value;
-            // User ID validation
+
             if (userId.length < 5 || userId.length > 12) {
-                alert("User ID must be between 5 and 12 characters long");
+                alert('Invalid User');
                 return;
             }
-            // Name validation
-            if (name.length < 10 || !/^[a-zA-Z ]+$/.test(name)) {
-                alert("Name must be at least 10 characters long and contain only alphabets");
-                return;
+
+            if (name.length < 15) {
+                alert('Invalid Name');
+                return;            
             }
-            // Password validation
-            var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                alert("Password must be eight characters including one uppercase letter, one special character,andalphanumeric characters");
-                return;
+            for (var i = 0; i < name.length; i++) {
+
+                var charCode = name.charCodeAt(i);
+
+                if (!(charCode >= 65 && charCode <= 90) && !(charCode >= 97 && charCode <= 122) && charCode !== 32){                      
+                        alert('Invalid Name');
+                        return; 
+                }
             }
-            // Email validation
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert("Invalid email address");
-                return;
+
+            // Validate Password
+            if (password.length < 8) {
+                alert('Invalid Password');
+                return; 
             }
-            let details = "User ID: " + userId + "\nName: " + name + "\nPassword: " + password + "\nEmail: " +
-                email;
-            alert(`${details}`)
+            var hasUppercase = false;
+            var hasLowercase = false;
+            var hasNumber = false;
+            var hasSpecialChar = false;
+            for (var i = 0; i < password.length; i++) {
+                var charCode = password.charCodeAt(i);
+                if (charCode >= 65 && charCode <= 90) hasUppercase = true;      // A-Z
+                else if (charCode >= 97 && charCode <= 122) hasLowercase = true; // a-z
+                else if (charCode >= 48 && charCode <= 57) hasNumber = true;     // 0-9
+                else hasSpecialChar = true;                                      // Special characters
+            }
+            if (!hasUppercase || !hasLowercase || !hasNumber || !hasSpecialChar) {
+                alert('Invalid Password');
+                return;            
+            }
+
+            // Validate Email
+            var atPosition = email.indexOf("@");
+            var dotPosition = email.lastIndexOf(".");
+            if (atPosition < 1 || dotPosition < atPosition + 2 || dotPosition + 2 >= email.length) {
+                alert('Invalid Email');
+                return;             
+            }
         }
+
     </script>
 </head>
 
