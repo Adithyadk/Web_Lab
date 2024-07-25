@@ -39,7 +39,7 @@
             <?php
             $file = fopen('info.txt', 'r');
             if ($file) {
-                while (($line = fgets($file)) !== false) {
+                while (($line = fgets($file)) != false) {
                     echo "<p>$line</p>";
                 }
                 fclose($file);
