@@ -28,12 +28,12 @@
     ?>
     <form method="POST">
         <label>Information:</label>
-        <textarea rows="20" cols="80" name="info">
-    </textarea>
+        <textarea rows="20" cols="80" name="info"> </textarea>
         <div>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
         </div>
+    </form>
         <div class="saved">
             <h1>Saved Information</h1>
             <?php
@@ -46,5 +46,4 @@
             }
             ?>
         </div>
-    </form>
 </body>
